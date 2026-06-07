@@ -1,77 +1,72 @@
-# sign-ai
-Real-time ASL fingerspelling recognition using MediaPipe hand tracking and machine learning.
-# SignAI
+#### SignAI
 
 SignAI is a real-time American Sign Language (ASL) fingerspelling recognition system built using Python, OpenCV, MediaPipe, and machine learning.
 
-The application uses a standard webcam to detect hand landmarks, classify static ASL fingerspelling gestures, and display predicted letters in real time.
+It enables real-time classification of static ASL alphabet gestures using a standard webcam, without requiring specialized hardware or cloud processing.
 
-#Problem
+Communication barriers can arise when Deaf and hard-of-hearing individuals use sign language in environments where others are not familiar with it, as well as makes sign language more accessible to understand. SignAI aims to address this by enabling real-time gesture recognition using lightweight, on-device machine learning.
 
-Communication barriers can arise when sign language users interact with people who do not understand sign language. Many existing solutions require specialized hardware, large datasets, or cloud-based processing.
+### Overview
 
-SignAI explores a lightweight, accessible approach using only a webcam and computer vision.
+SignAI captures live video from a webcam, detects hand landmarks using MediaPipe, and predicts ASL alphabet gestures using a trained machine learning model. The prediction is displayed in real time on the screen.
 
-Features
+The system is designed to be lightweight, fast, and runnable on standard laptops.
 
-* Real-time webcam-based recognition
-* MediaPipe hand tracking
-* 21-hand-landmark extraction
-* Machine learning classification
-* Live ASL fingerspelling prediction
-* No specialized hardware required
-
+### Features
+Real-time ASL fingerspelling recognition using webcam input
+MediaPipe-based hand landmark detection (21 key points per hand)
+Machine learning model for alphabet classification
+Live prediction overlay in real time
+Fully offline processing (no cloud dependency)
+Lightweight design suitable for low-resource devices
 How It Works
+Webcam captures live hand movement
+MediaPipe extracts 21 hand landmarks per frame
+Landmark coordinates are converted into feature vectors
+A trained ML model predicts the corresponding ASL letter
+Prediction is displayed instantly on screen
 
-1. A webcam captures the user's hand.
-2. MediaPipe extracts 21 hand landmarks.
-3. Landmark coordinates are converted into numerical feature vectors.
-4. A machine learning model predicts the corresponding ASL fingerspelling letter.
-5. The prediction is displayed on screen in real time.
 
-Tech Stack
-
-* Python
-* OpenCV
-* MediaPipe
-* Scikit-learn
-* Pandas
-* NumPy
-
+### Tech Stack
+Python
+OpenCV
+MediaPipe
+Scikit-learn
+NumPy
+Pandas
 Project Structure
-
-```text
 sign-ai/
-│
-├── collect.py      # Dataset collection
-├── train.py        # Model training
-├── predict.py      # Real-time prediction
-├── utils.py        # Utility functions
-├── data/           # Collected landmark datasets
-├── model.pkl       # Trained model
+├── collect.py      # Dataset collection using webcam
+├── train.py        # Model training pipeline
+├── predict.py      # Real-time inference
+├── utils.py        # Helper functions
+├── data/           # Collected landmark dataset
+├── model.pkl       # Trained machine learning model
 └── README.md
-```
 
-Dataset
+### Dataset
 
-The training dataset was created by collecting MediaPipe hand landmark coordinates for static ASL fingerspelling gestures.
+The dataset was created using MediaPipe hand landmark extraction.
 
-Each sample contains the x, y, and z coordinates of 21 detected hand landmarks.
+Each sample consists of 21 hand landmarks (x, y, z coordinates) representing static ASL fingerspelling gestures.
 
-Current Scope
+### Current Scope
 
-This prototype focuses on static ASL fingerspelling gestures.
+This project currently supports static ASL alphabet recognition.
 
-Dynamic gestures such as J and Z are not currently supported because they require motion-based recognition rather than single-frame classification.
+Dynamic gestures such as J and Z are not included, as they require temporal (sequence-based) motion modeling rather than single-frame classification.
 
-Future Improvements
+### Future Improvements
+Dynamic gesture recognition (J and Z) using sequence models
+Word and sentence formation from letter predictions
+Sign language to text/speech conversion
+Web deployment using Streamlit or Flask
+Larger and more diverse dataset collection
 
-* Dynamic gesture recognition (J and Z)
-* Word and phrase formation
-* Sign-language-to-text conversion
-* Sign-language-to-speech output
-* Web deployment using Streamlit
-* Larger and more diverse training datasets
 
-Demo
+### How to Run
 
+pip install -r requirements.txt
+python collect.py
+python train.py
+python predict.py
